@@ -27,7 +27,7 @@ const inputSchema = z.object({
 });
 
 async function handler(request: Request) {
-  const headersList = headers();
+  const headersList = await headers();
   const requestBody = await request.json();
 
   // HMAC verification

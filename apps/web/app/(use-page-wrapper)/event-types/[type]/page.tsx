@@ -10,7 +10,7 @@ import { getServerSideProps } from "@lib/event-types/[type]/getServerSideProps";
 import EventTypePageWrapper from "~/event-types/views/event-types-single-view";
 
 export const generateMetadata = async ({ params, searchParams }: _PageProps) => {
-  const legacyCtx = buildLegacyCtx(headers(), cookies(), params, searchParams);
+  const legacyCtx = buildLegacyCtx(await headers(), await cookies(), await params, await searchParams);
   const { eventType } = await getData(legacyCtx);
 
   return await _generateMetadata(
@@ -22,7 +22,7 @@ export const generateMetadata = async ({ params, searchParams }: _PageProps) => 
 const getData = withAppDirSsr<EventTypePageProps>(getServerSideProps);
 
 const ServerPage = async ({ params, searchParams }: _PageProps) => {
-  const legacyCtx = buildLegacyCtx(headers(), cookies(), params, searchParams);
+  const legacyCtx = buildLegacyCtx(await headers(), await cookies(), await params, await searchParams);
   const props = await getData(legacyCtx);
 
   return <EventTypePageWrapper {...props} />;
